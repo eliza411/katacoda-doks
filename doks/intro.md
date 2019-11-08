@@ -6,4 +6,4 @@ In this course, we'll be learning fundamentals about Kubernetes live on a
 real cloud provider, DigitalOcean. This means you'll be able to interact
 with your cluster in a real dashboard, and it'll be live on the internet!
 
-![Katacoda Logo](/do-product-docs/scenarios/doks/assets/doks.png)
+![DigitalOcean Kubernetes](/do-product-docs/scenarios/doks/assets/doks.png)
