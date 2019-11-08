@@ -1,5 +1,3 @@
-## Example page
-
 Hello, and welcome to Kubernetes!
 
 In this course, we'll be learning fundamentals about Kubernetes live on a
