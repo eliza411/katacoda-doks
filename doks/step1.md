@@ -1,16 +1,7 @@
-## Let the environment
-
-We're setting up the environment with `doctl`, the command-line interface
-for DigitalOcean accounts, and `kubectl`, the command-line interface for
-Kubernetes.
-
-When you see the terminal read `ALL DONE! CONTINUE...`, you're ready to
-start running some commands!
-
-## Now
+## Connect to your DigitalOcean Account
 
 1. [Sign up for a DigitalOcean account](https://cloud.digitalocean.com/registrations/new)
-2. Provide billing information
+2. [Add a payment method](https://cloud.digitalocean.com/account/billing)
 3. [Generate a token](https://cloud.digitalocean.com/account/api/tokens/new)
 with read and write access, and name it anything you like.
 
