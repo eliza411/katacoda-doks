@@ -19,8 +19,7 @@ token string when prompted.
 
 ```
 doctl auth init
-```
-{{execute}}
+```{{execute}}
 
 Great!
 
@@ -28,8 +27,7 @@ Now let's spin up an empty Kubernetes cluster to work with:
 
 ```
 doctl kubernetes cluster create mycluster --region sfo2
-```
-{{execute}}
+```{{execute}}
 
 As you'll see in the terminal output this also automatically configured
 `kubectl` to connect with that cluster. Easy enough!
