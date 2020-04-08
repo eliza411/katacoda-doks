@@ -19,7 +19,7 @@
     }
   },
   "environment": {
-    "uilayout": "editor-terminal"
+    "uilayout": "editor-terminal-split"
   },
   "backend": {
     "imageid": "ubuntu1904"

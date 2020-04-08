@@ -24,7 +24,7 @@ As you'll see in the terminal output this also automatically configured
 > Yep, at this point, you can run arbitrary kubectl commands and they'll
 > deploy on DOKS. Easy as pie.
 
-<pre class="file" data-filename="app.js" data-target="replace">var http = require('http');
+<pre class="file" data-filename="app.js" data-katacoda-layout="editor-terminal-split">var http = require('http');
 var requestListener = function (req, res) {
   res.writeHead(200);
   res.end('Hello, World!');
