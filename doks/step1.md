@@ -24,7 +24,11 @@ As you'll see in the terminal output this also automatically configured
 > Yep, at this point, you can run arbitrary kubectl commands and they'll
 > deploy on DOKS. Easy as pie.
 
-<pre class="file" data-filename="app.js" data-target="replace">var http = require('http');
+## New File Open
+
+`newFile.js`{{open}}
+
+<pre class="file" data-filename="newFile.js" data-target="replace">var http = require('http');
 var requestListener = function (req, res) {
   res.writeHead(200);
   res.end('Hello, World!');
@@ -33,11 +37,3 @@ var requestListener = function (req, res) {
 var server = http.createServer(requestListener);
 server.listen(3000, function() { console.log("Listening on port 3000")});
 </pre>
-
-## New File Execute
-
-`touch newFile.js`{{execute}}
-
-## New File Open
-
-`newFile.js`{{open}}
