@@ -1,8 +1,7 @@
 ## Connect to your DigitalOcean Account
 
 1. [Sign up for a DigitalOcean account](https://cloud.digitalocean.com/registrations/new)
-2. [Add a payment method](https://cloud.digitalocean.com/account/billing)
-3. [Generate a token](https://cloud.digitalocean.com/account/api/tokens/new)
+2. [Generate a token](https://cloud.digitalocean.com/account/api/tokens/new)
 with read and write access, and name it anything you like.
 
 Save the token string somewhere safe, it won't be displayed again!
@@ -26,9 +25,9 @@ As you'll see in the terminal output this also automatically configured
 
 ## New File Open
 
-`newFile2.js`{{open}}
+Open a new file `newFile2.js`{{open}}
 
-<pre class="file" data-filename="newFile2.js" data-target="replace">var http = require('http');
+<pre class="file open" data-filename="newFile2.js" data-target="replace">var http = require('http');
 var requestListener = function (req, res) {
   res.writeHead(200);
   res.end('Hello, World!');
@@ -36,4 +35,4 @@ var requestListener = function (req, res) {
 
 var server = http.createServer(requestListener);
 server.listen(3000, function() { console.log("Listening on port 3000")});
-</pre>{{open}}
+</pre>
