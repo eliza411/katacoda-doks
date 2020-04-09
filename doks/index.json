@@ -23,7 +23,7 @@
   ],
   "environment": {
     "uilayout": "editor-terminal",
-    "uieditorpath": "/home/scrapbook/tutorial/example"
+    "uieditorpath": "/root/example"
   },
   "backend": {
     "imageid": "ubuntu1904"
