@@ -34,8 +34,10 @@ var server = http.createServer(requestListener);
 server.listen(3000, function() { console.log("Listening on port 3000")});
 </pre>
 
+## New File Execute
 
-<pre class="file" data-target="clipboard">Test</pre>
+`touch newFile.js`{{execute}}
 
+## New File Open
 
-<pre class="file" data-target="regex???">Test</pre>
+`newFile.js`{{open}}
