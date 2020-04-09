@@ -12,14 +12,15 @@
     ],
     "intro": {
       "text": "intro.md",
-      "courseData": "setup.sh"
+      "code": "setup.sh"
     },
     "finish": {
       "text": "finish.md"
     }
   },
   "environment": {
-    "uilayout": "editor-terminal-split"
+    "uilayout": "editor-terminal",
+    "uieditorpath": "/home/scrapbook/tutorial/example"
   },
   "backend": {
     "imageid": "ubuntu1904"
