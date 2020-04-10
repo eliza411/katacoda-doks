@@ -124,7 +124,7 @@ Let's run it and at long last see your application at work:
 
 You should see a notice that Python is serving your app at http://0.0.0.0:80.
 
-To see the output, click the plus sign (*+*) to the right and select **View HTTP port 80 on Host 1**. Sure enough, our app says "Hello World!" a hostname provided by the Docker environment, and a message that it can't connect to Redis. (After all, we haven't installed Redis itself, just the Python library that connects to it.)
+To see the output, click the plus sign (**+**) to the right and select **View HTTP port 80 on Host 1**. Sure enough, our app says "Hello World!" a hostname provided by the Docker environment, and a message that it can't connect to Redis. (After all, we haven't installed Redis itself, just the Python library that connects to it.)
 
 Try clicking this to run the app again:
 
@@ -137,18 +137,18 @@ Try clicking this to run the app again:
 
 This is all well and good for your local environment, but the image we made is sitting in our local registry. To run it in production, we'll need to upload the image to a remote registry. DigitalOcean provides such a thing. Since you've already authenticated this environment with your DigitalOcean account in the beginning, you can create a registry now and log into it with Docker.
 
-`doctl registry create do-katacoda`{{execute interrupt}}
+`doctl registry create do-katacoda-[[KATACODA_HOST]]`{{execute interrupt}}
 
 `doctl registry login`{{execute}}
 
 Now that you have a destination and Docker knows where it's pointing, have Docker `tag` your local image as being equivalent to the destination image, and send your local image on its way.
 
-`docker tag friendlyhello registry.digitalocean.com/do-katacoda/friendlyhello`{{execute}}
+`docker tag friendlyhello registry.digitalocean.com/do-katacoda-[[KATACODA_HOST]]/friendlyhello`{{execute}}
 
-`docker push registry.digitalocean.com/do-katacoda/friendlyhello`{{execute}}
+`docker push registry.digitalocean.com/do-katacoda-[[KATACODA_HOST]]/friendlyhello`{{execute}}
 
 All uploaded! Now any machine on DigitalOcean that's run that same login step can pull your image from the DigitalOcean registry in the cloud and run it, with no Python setup, no `pip` installation, or anything. The command is much the same, except now we use the DigitalOcean registry's version of the image.
 
 `docker run -p 80:80 registry.digitalocean.com/do-katacoda/friendlyhello`{{execute}}
 
-You'll see Docker pull the image from the registry and run it. Again, you can see the output if you click the plus sign (*+*) to the right and select **View HTTP port 80 on Host 1**.
+You'll see Docker pull the image from the registry and run it. Again, you can see the output if you click the plus sign (**+**) to the right and select **View HTTP port 80 on Host 1**.
