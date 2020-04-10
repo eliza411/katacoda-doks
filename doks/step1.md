@@ -1,3 +1,9 @@
+In this module, we're going to take a small app and build it into a portable
+artifact called and image, and run it in an environment called a cluster. We'll
+be using the DigitalOcean Kubernetes platform to do this, which manages away
+a lot of complexity for us. But first, you'll need to have a DigitalOcean
+account at the ready.
+
 ## Step 1: Authenticate this Environment with Your DigitalOcean Account
 
 1. [Sign up for a DigitalOcean account](https://cloud.digitalocean.com/registrations/new)
@@ -16,7 +22,7 @@ token string when prompted.
 This app just reports its hostname to the screen, and tries to connect to a
 visitor counter, reporting that it can't if one isn't running.
 
-Click this link to create `app.py`{{open}}
+Click this link to *create `app.py`{{open}}*
 
 Now click the **Copy to Editor** to slot in our source code to `app.py`:
 
@@ -47,7 +53,9 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
 </pre>
 
-As you can see, it's depending on the Python libraries for Flask and Redis. The way we express that dependency in Python is usually with a text file, so click this link to create `requirements.txt`{{open}}.
+As you can see, it's depending on the Python libraries for Flask and Redis. The way we express that dependency in Python is usually with a text file.
+
+Click this link to *create `requirements.txt`{{open}}*.
 
 And click **Copy to Editor** to express our requirements in our new file.
 
@@ -69,13 +77,13 @@ But, if we simply define the environment we need to run this code in a
 the runtime and the dependencies our code needs to run anywhere. That way when
 we deploy, the code and everything it needs to run all travels together.
 
-Click this link to create a `Dockerfile`{{open}}.
+Click this link to *create a `Dockerfile`{{open}}*.
 
 And click **Copy to Editor** to slot in the following code:
 
 <pre class="file" data-filename="Dockerfile" data-target="replace">
 # Use an official Python runtime as a parent image
-FROM python:2.7-slim
+FROM python:slim
 
 # Set the working directory to /app
 WORKDIR /app
@@ -130,11 +138,13 @@ Try clicking this to run the app again:
 This is all well and good for your local environment, but the image we made is sitting in our local registry. To run it in production, we'll need to upload the image to a remote registry. DigitalOcean provides such a thing. Since you've already authenticated this environment with your DigitalOcean account in the beginning, you can create a registry now and log into it with Docker.
 
 `doctl registry create do-katacoda`{{execute interrupt}}
+
 `doctl registry login`{{execute}}
 
 Now that you have a destination and Docker knows where it's pointing, have Docker `tag` your local image as being equivalent to the destination image, and send your local image on its way.
 
-`docker tag myimage registry.digitalocean.com/do-katacoda/friendlyhello`{{execute}}
+`docker tag friendlyhello registry.digitalocean.com/do-katacoda/friendlyhello`{{execute}}
+
 `docker push registry.digitalocean.com/do-katacoda/friendlyhello`{{execute}}
 
 All uploaded! Now any machine on DigitalOcean that's run that same login step can pull your image from the DigitalOcean registry in the cloud and run it, with no Python setup, no `pip` installation, or anything. The command is much the same, except now we use the DigitalOcean registry's version of the image.
@@ -142,7 +152,3 @@ All uploaded! Now any machine on DigitalOcean that's run that same login step ca
 `docker run -p 80:80 registry.digitalocean.com/do-katacoda/friendlyhello`{{execute}}
 
 You'll see Docker pull the image from the registry and run it. Again, you can see the output if you click the plus sign (*+*) to the right and select **View HTTP port 80 on Host 1**.
-
-## Up next: Orchestrating
-
-It's all well and good to oiawefoiawjfoiwjef
