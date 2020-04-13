@@ -163,11 +163,11 @@ Each virtual machine you add to a cluster is called a node, and operates as empt
 
 DigitalOcean's Kubernetes product is a managed Kubernetes product that abstracts away a great deal of the complexity of Kubernetes for you. Let's create an empty Kubernetes cluster now on DigitalOcean and deploy our app on it.
 
-`doctl kubernetes cluster create do-katacoda --tag do-katacoda --auto-upgrade=true --node-pool "name=mypool;count=2;auto-scale=true;min-nodes=1;max-nodes=3;tag=do-katacoda"`{{execute interrupt}}
+`doctl kubernetes cluster create do-katacoda-[[KATACODA_HOST]] --tag do-katacoda --auto-upgrade=true --node-pool "name=mypool;count=2;auto-scale=true;min-nodes=1;max-nodes=3;tag=do-katacoda"`{{execute interrupt}}
 
 This operation will take awhile, so while it's working, let's break this command up into it's parts so we can understand it:
 
-- `doctl kubernetes cluster create do-katacoda --tag do-katacoda` tells DigitalOcean to create a cluster named `do-katacoda` for us, and `--tag` it as `do-katacoda`, too.
+- `doctl kubernetes cluster create do-katacoda-[[KATACODA_HOST]] --tag do-katacoda` tells DigitalOcean to create a cluster named `do-katacoda-[[KATACODA_HOST]]` for us, and `--tag` it as `do-katacoda`.
 - `--auto-upgrade=true` tells DigitalOcean to automatically apply release patches to our cluster to protect the security and stability of our cluster.
 - `--node-pool name=mypool;count=2;auto-scale=true;min-nodes=1;max-nodes=3;tag=do-katacoda` instructs DigitalOcean to initialize the cluster with a two-node group of virtual machines called a *node pool*, name it "mypool," tag the nodes `do-katacoda`, and allow the pool to automatically scale in size between one and three nodes (depending on the needed capacity).
 
@@ -183,7 +183,7 @@ Last time we used our private registry, we authenticated our local Docker instal
 
 After running the previous command, you'll see that the secret was upload and given the same name as your registry. Now we tell Kubernetes what the secret is for by using the secret as an `imagePullSecret`; that way, when we run containers in the cluster, they'll be all set to "pull" our images from our private registry:
 
-`kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "secret/registry-do-katacoda-[[KATACODA_HOST]]"}]}'`{{execute}}
+`kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "registry-do-katacoda-[[KATACODA_HOST]]"}]}'`{{execute}}
 
 Now let's show the power of DigitalOcean Kubernetes by using our two nodes of capacity and running multiple instances of our application at once on our cluster. To do that, we'll create a Deployment of our app, which is the object Kubernetes uses to maintain the desired state of our running containers. This will actually launch the app live in the cluster.
 
