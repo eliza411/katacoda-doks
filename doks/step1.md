@@ -183,11 +183,11 @@ Last time we used our private registry, we authenticated our local Docker instal
 
 After running the previous command, you'll see that the secret was upload and given the same name as your registry. Now we tell Kubernetes what the secret is for by using the secret as an `imagePullSecret`; that way, when we run containers in the cluster, they'll be all set to "pull" our images from our private registry:
 
-`kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "do-katacoda-[[KATACODA_HOST]]"}]}'`{{execute}}
+`kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "secret/registry-do-katacoda-[[KATACODA_HOST]]"}]}'`{{execute}}
 
 Now let's show the power of DigitalOcean Kubernetes by using our two nodes of capacity and running multiple instances of our application at once on our cluster. To do that, we'll create a Deployment of our app, which is the object Kubernetes uses to maintain the desired state of our running containers. This will actually launch the app live in the cluster.
 
-`kubectl create deployment my-python-app --image=registry.digitalocean.com/do-katacoda/my-python-app`{{execute}}
+`kubectl create deployment my-python-app --image=registry.digitalocean.com/do-katacoda-[[KATACODA_HOST]]/my-python-app`{{execute}}
 
 One aspect of the Deployment we created is its default ReplicaSet, which is the object Kubernetes uses to maintain a stable number of replicas of your container. Each replica is a separate running instance of your container called a Pod. Since we haven't defined anything about the ReplicaSet running our container, it's just running one replica:
 
