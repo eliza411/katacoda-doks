@@ -179,15 +179,17 @@ Now we have capacity in the cloud to run our app in a real Kubernetes cluster, a
 
 `doctl registry kubernetes-manifest | kubectl apply -f -`{{execute}}
 
-Last time we used our private registry, we authenticated our local Docker installation, which stored the credentials for our registry on our local machine. This time, we authenticated our Kubernetes cluster in the cloud, which stored our registry credentials as a *secret*, which is the built-in mechanism Kubernetes offers for exactly this purpose. So now, our new cluster is free to run images we've stored in `do-katacoda-[[KATACODA_HOST]]`.
+Last time we used our private registry, we authenticated our local Docker installation, which stored the credentials for our registry on our local machine. This time, we authenticated our Kubernetes cluster in the cloud, which stored our registry credentials as a *secret*, which is the built-in mechanism Kubernetes offers for exactly this purpose.
 
-Let's show the power of DigitalOcean Kubernetes by running multiple instances of our application at once on our cluster. After all, we have two machines worth of capacity to use.
+After running the previous command, you'll see that the secret was upload and given the same name as your registry. Now we tell Kubernetes what the secret is for by using the secret as an `imagePullSecret`; that way, when we run containers in the cluster, they'll be all set to "pull" our images from our private registry:
 
-First, let's create a Deployment of our app, which is the object Kubernetes uses to maintain the desired state of our running container. This will actually launch the app live in the cluster.
+`kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "do-katacoda-[[KATACODA_HOST]]"}]}'`{{execute}}
+
+Now let's show the power of DigitalOcean Kubernetes by using our two nodes of capacity and running multiple instances of our application at once on our cluster. To do that, we'll create a Deployment of our app, which is the object Kubernetes uses to maintain the desired state of our running containers. This will actually launch the app live in the cluster.
 
 `kubectl create deployment my-python-app --image=registry.digitalocean.com/do-katacoda/my-python-app`{{execute}}
 
-When we created this Deployment, we also created a default ReplicaSet, which is the object Kubernetes uses to maintain a stable number of replicas of your container. Each replica is a separate running instance of your container called a Pod. Since we haven't defined anything about the ReplicaSet running our container, it's just running one replica:
+One aspect of the Deployment we created is its default ReplicaSet, which is the object Kubernetes uses to maintain a stable number of replicas of your container. Each replica is a separate running instance of your container called a Pod. Since we haven't defined anything about the ReplicaSet running our container, it's just running one replica:
 
 `kubectl get rs`{{execute}}
 
@@ -205,4 +207,4 @@ Next, let's expose our Deployment to the world, so we're routing traffic to it, 
 
 `kubectl expose deployment my-python-app --type=LoadBalancer --port=80 --target-port=80`{{execute}}
 
-And just like that, we have exposed 10 load-balanced replicas of our simple Python app to the world. Navigate to the IP address of the LoadBalancer and hit refresh, and you'll see that the `hostname` we used earlier is changing with every refresh - cycling between the ten container IDs. 
+And just like that, we have exposed 10 load-balanced replicas of our simple Python app to the world. Navigate to the IP address of the LoadBalancer and hit refresh, and you'll see that the `hostname` we used earlier is changing with every refresh - cycling between the ten container IDs.
