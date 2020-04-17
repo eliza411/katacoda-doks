@@ -219,15 +219,19 @@ cluster now on DigitalOcean and deploy our app on it.
 This operation will take a long while, so while it's working, let's break this
 command up into it's parts so we can understand it:
 
-`doctl kubernetes cluster create do-katacoda-[[KATACODA_HOST]]-[[HOST_SUBDOMAIN]] --tag do-katacoda` tells DigitalOcean to create a cluster named `do-katacoda-[[KATACODA_HOST]]-[[HOST_SUBDOMAIN]]` for us, and `--tag` it as `do-katacoda`.
+`doctl kubernetes cluster create do-katacoda-[[KATACODA_HOST]]-[[HOST_SUBDOMAIN]] --tag do-katacoda`
+This portion of the command tells DigitalOcean to create a cluster named
+`do-katacoda-[[KATACODA_HOST]]-[[HOST_SUBDOMAIN]]` for us, and `--tag` it as
+`do-katacoda`.
 
-`--auto-upgrade=true` tells DigitalOcean to automatically apply release patches
-to our cluster to protect the security and stability of our cluster.
+`--auto-upgrade=true`
+This tells DigitalOcean to automatically apply release patches to our cluster to
+protect the security and stability of our cluster.
 
 `--node-pool
 name=mypool;count=2;auto-scale=true;min-nodes=1;max-nodes=3;tag=do-katacoda`
-instructs DigitalOcean to initialize the cluster with a two-node group of
-virtual machines called a *node pool*, name it "mypool," tag the nodes
+This instructs DigitalOcean to initialize the cluster with a two-node group of
+virtual machines called a *node pool*, name it `mypool`, tag the nodes
 `do-katacoda`, and allow the pool to automatically scale in size between one and
 three nodes (depending on the needed capacity).
 
@@ -241,23 +245,27 @@ three nodes (depending on the needed capacity).
 
 The *node pool* is a concept that is unique to DigitalOcean Kubernetes. A node
 pool is a group of virtual machines that you configure to be of a certain size
-and number, and DigitalOcean enforces whatever state you want these machines to
-be in.
+and number. After setting the parameters of a node pool, DigitalOcean enforces
+that for you via a mechanism called the *reconciler*.
 
 The *reconciler*, which enforces your cluster configuration by "reconciling" the
-current state and the desired state, is also unique to DigitalOcean. Because the
-reconciler is running, you shouldn't be directly accessing any nodes and
-configuring them. Nodes are ephemeral and will come and go based on how you've
-configured your node pool. So, you should really think of nodes as capacity, and
-let DigitalOcean manage them for you.
+desired state versus the current state, is also unique to DigitalOcean. Because
+the reconciler is running, you shouldn't be accessing any nodes directly (such
+as through SSH) or making local changes. Such changes will be viewed as
+aberrations and "paved over" by the reconciler. Remember that because this is a
+managed Kubernetes environment, nodes are ephemeral and will come and go
+according to how you've configured your node pool. In short, you should think of
+nodes as capacity for running containers, and let DigitalOcean manage them for
+you.
 
 There are a number of machine sizes you can use for a node, each one offering a
-different combination of memory, and CPU cores. When you create a node pool,
-machine size is configurable using any value you see with `doctl kubernetes
-options sizes`. By default, the nodes have 1 CPU and 2GB of memory, but only 1GB
-of that memory is available for your container workloads due to the overhead of
-the operating system and all the software running DigitalOcean Kubernetes.
-(We're leaving it that way for this course because our app is so simple.)
+different combination of memory and CPU cores. When you create a node pool,
+machine size is configurable using any slug you see with
+`doctl kubernetes options sizes`. By default, the nodes have 1 CPU and 2GB of
+memory, but only 1GB of that memory is available for your container workloads
+due to the overhead of the operating system and all the software running
+DigitalOcean Kubernetes. (We're leaving it that way for this course because our
+app is so simple that 1GB of memory is sufficient.)
 
 If you change the desired machine size after creating the node pool,
 DigitalOcean will gracefully *recycle* the nodes -- the reconciler
