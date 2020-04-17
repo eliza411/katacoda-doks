@@ -81,9 +81,9 @@ this code to someone who doesn't have the same environment as you.
 
 But, if we define the environment we need to run this code in a `Dockerfile`, we
 can create an image, which is a build of not only our code, but the runtime and
-the dependencies our code needs to run anywhere. That way when we deploy, the
-code and everything it needs to run all travels together. The reproducibility
-problem is thus solved!
+the dependencies our code needs to run anywhere. That way, when we deploy, the
+code and everything it needs to run all travels together, solving the
+reproducibility problem.
 
 #### Create Dockerfile
 
