@@ -150,7 +150,7 @@ Try clicking this to run the app again:
  actually just the ID of the *container* -- the runtime instance of our
  image.
 
-## Upload it
+## Step 4: Upload Your Docker Image
 
 This is all well and good for your local environment, but the image we made is
 sitting in our local registry. To run it in production, we'll need to upload the
@@ -159,8 +159,8 @@ image to a remote registry. DigitalOcean provides that very thing.
 Since you've already authenticated this environment with your DigitalOcean
 account in the beginning, you can create a registry now and log into it with
 Docker. We're going to name your registry with the randomly-generated
-`do-katacoda-[[KATACODA_HOST]]-[[HOST_SUBDOMAIN]]` because registry names have to be globally
-unique.
+`do-katacoda-[[KATACODA_HOST]]-[[HOST_SUBDOMAIN]]` because registry names have
+to be globally unique.
 
 `doctl registry create do-katacoda-[[KATACODA_HOST]]-[[HOST_SUBDOMAIN]]`{{execute interrupt}}
 
@@ -188,7 +188,7 @@ image.
 
 `docker run -p 80:80 registry.digitalocean.com/do-katacoda-[[KATACODA_HOST]]-[[HOST_SUBDOMAIN]]/my-python-app`{{execute}}
 
-## Create Your First Cluster
+## Step 5: Create a Cluster
 
 As thrilling as it is to `docker run` a container and see instant, reproducable
 results, that just runs the one container. We haven't launched a container for
@@ -264,7 +264,7 @@ DigitalOcean will gracefully *recycle* the nodes -- the reconciler
 destroying the old nodes at the same rate as they are being replaced with the
 new ones.
 
-## Run Your App on a Cluster
+## Step 6: Run Your App on a Cluster
 
 You will know your cluster is ready when you finally get output that looks like this:
 
