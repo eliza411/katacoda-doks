@@ -2,7 +2,7 @@
   "title": "Learning Kubernetes on DigitalOcean",
   "description": "Learn the fundamentals of Kubernetes, while creating a cluster that is ready to go into production!",
   "difficulty": "Beginner",
-  "time": "15",
+  "time": "18",
   "details": {
     "steps": [
       {
